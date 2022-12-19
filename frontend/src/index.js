@@ -3,11 +3,29 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import FormRegister from './components/user/FormRegister';
+import FormLogin from './components/user/FormLogin';
+import FormNota from './components/nota/FormNota';
+import ListNota from './components/nota/ListNota';
+import Menu from './components/navbar/Navbar';
+import { BrowserRouter, Routes, Route} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <BrowserRouter>
+      <Menu></Menu>
+      <Routes>
+        <Route exact path='/' element={<App></App>}></Route>
+        <Route path='/register' element={<FormRegister></FormRegister>}></Route>
+        <Route path='/login' element={<FormLogin></FormLogin>}></Route>
+        <Route path='/notas' element={<ListNota></ListNota>}></Route>
+        <Route path='/create-nota' element={<FormNota></FormNota>}></Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
