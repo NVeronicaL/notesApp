@@ -17,7 +17,7 @@ const Menu = () => {
                 <Nav.Link href="/register">Registro</Nav.Link>
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/notas">Notas</Nav.Link>
-                <Nav.Link href="/create-nota">Nota</Nav.Link>
+                {/* <Nav.Link href="/create-nota">Nota</Nav.Link> */}
                 </Nav>
             </Navbar.Collapse>
             </Container>
