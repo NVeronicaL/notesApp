@@ -20,7 +20,7 @@ export const deleteNota = async(id) => {
 }
 
 export const createNota = async(newNota) => {
-    console.log('newNota:', newNota)
+    console.log('newNota:', JSON.stringify(newNota))
 
     return await fetch(API_URL+'create-nota/',{
         method: "POST",

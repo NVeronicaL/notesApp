@@ -28,9 +28,10 @@ const FormLogin = () => {
         // formData.append('username', user.username);
         // formData.append('email', user.email);
         // formData.append('password', user.password);
-
-        axios
-        .post('http://127.0.0.1:8000/user/login', user, {
+        let user = localStorage.getItem("user");
+        console.log('userLocalStorage', user);
+        axios   
+        .post('http://127.0.0.1:8000/user/login/', JSON.parse(user), {
             headers: {
                 "Content-Type": "application/json",
             },

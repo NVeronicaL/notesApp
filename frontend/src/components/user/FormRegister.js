@@ -38,6 +38,7 @@ const FormRegister = () => {
         })
         .then((response) => {
             setUser(response.data);
+            localStorage.setItem("user", JSON.stringify(response.data));
             navigate('/login');
         });
     }
