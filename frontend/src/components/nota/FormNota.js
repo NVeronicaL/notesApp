@@ -1,10 +1,15 @@
 // import { render } from "@testing-library/react";
 import React, {useState, useEffect} from "react";
-// import {useParams, useNavigate} from "reac-router-dom";
+// import { useNavigate } from "react-router-dom";
 
-import * as Server from './NotaServer';
+import axios from "axios";
+
+
+// import * as Server from './NotaServer';
 
 const FormNota = () => {
+    // const navigate = useNavigate();
+
     // HOOK useState
     const [nota, setNota] = useState({
         title: '',
@@ -12,7 +17,7 @@ const FormNota = () => {
         status: '',
         deadline: '',
         creation_date: '',
-        user: null
+        user: ''
     });
 
     const [status, setStatus] = useState({
@@ -31,27 +36,28 @@ const FormNota = () => {
         setStatus({...status, [e.target.name]: e.target.value})
     }
 
-    async function handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
-        let formData = new FormData();
-        formData.append('title', nota.title);
-        formData.append('description', nota.description);
-        formData.append('status', nota.status);
-        formData.append('deadline', nota.deadline);
-        formData.append('creation_date', nota.status);
-        formData.append('user', nota.user);
+        // let formData = new FormData();
+        // formData.append('title', nota.title);
+        // formData.append('description', nota.description);
+        // formData.append('status', nota.status);
+        // formData.append('deadline', nota.deadline);
+        // formData.append('creation_date', nota.status);
+        // formData.append('user', nota.user);
         
-        
-        try {
-            console.log('formData:', formData);
-            console.log('nota:', nota);
-            const response = await Server.createNota(nota);
-            const data = response.json();
-            console.log('DATA: ', data);
-        } catch (error) {
-            console.log(error);
-        }
+        axios
+        .post('http://127.0.0.1:8000/nota/create-nota/', nota, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => {
+            console.log(response);
+            setNota(response.data);
+            // navigate('/notas');
+        });
     }
     // Efecto
     useEffect(() => {
@@ -60,7 +66,7 @@ const FormNota = () => {
     return(
         <>
         <div>
-            <div className="col-md-3 mx-auto">
+            <div className="col-md-3 mx-auto" style={{background:"#dee2e6",padding: "10px", marginTop: "50px"}}>
             <h2 className="mb-3 text-center">Formulario de Nota</h2>
             <hr style={{color: 'pink'}}></hr>
             <form className="form-nota"onSubmit={handleSubmit}>
