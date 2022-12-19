@@ -1,6 +1,6 @@
 // import { render } from "@testing-library/react";
 import React, {useState, useEffect} from "react";
-// import {useParams, useNavigate} from "reac-router-dom";
+import {useParams} from "react-router-dom";
 // import {Link} from "react-router-dom";
 
 // Imports de elementos de bootstrap
@@ -13,6 +13,9 @@ import axios from "axios";
 
 
 const Nota = ( ) => {
+
+    let { id } = useParams();
+
     // HOOK useState
     const [nota, setNota] = useState({
         // title: '',
@@ -25,11 +28,11 @@ const Nota = ( ) => {
 
     // Efecto
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/nota/detail-nota/9').then((response) => {
+        axios.get('http://127.0.0.1:8000/nota/detail-nota/'+id).then((response) => {
             console.log(response);
             setNota(response.data);
           });
-    }, [])
+    }, [id])
 
 
     return(

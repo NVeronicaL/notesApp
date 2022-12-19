@@ -41,7 +41,7 @@ const ListNota = () => {
             <>
                 {notas.map((nota) => (
                     <ListGroup key={nota.id}>
-                        <ListGroup.Item >N°{nota.id} - {nota.title} <Link to={'/nota'}>Ver</Link></ListGroup.Item>
+                        <ListGroup.Item >N°{nota.id} - {nota.title} <Link to={'/nota/'+ nota.id}>Ver</Link></ListGroup.Item>
                     </ListGroup>
                 ))}
             </>
