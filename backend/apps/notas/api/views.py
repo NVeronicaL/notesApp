@@ -3,6 +3,8 @@
 # Rest imports
 from rest_framework.views import APIView
 from rest_framework.response import Response
+# from rest_framework.permissions import IsAuthenticated
+
 from rest_framework import status
 
 # Models imports
@@ -17,7 +19,7 @@ from apps.notas.helpers.notaErrors import existeNota
 # Create your views here.
 
 class NotaApiView(APIView):
-    
+    # permission_classes = (IsAuthenticated, )
     def get(self, request):
         """Retorno un listado con todas las notas en la base"""
     
@@ -56,9 +58,10 @@ class NotaApiView(APIView):
     #     )
 
 class CreateNotaApiView(APIView): 
+    # permission_classes = (IsAuthenticated, )
     def post(self, request):
         """Crea un nuevo registro/nota """
-        serializer = NotaSerializer(data=request.data, many=True)
+        serializer = NotaSerializer(data=request.data)
         # print(serializer.type())
         print(serializer)
 
@@ -78,7 +81,7 @@ class CreateNotaApiView(APIView):
         )
 
 class NotaDetailApiView(APIView):
-
+    # permission_classes = (IsAuthenticated, )
     def get(self, request, pk):
         """Nos retorna mas info de una Nota en particular"""
 

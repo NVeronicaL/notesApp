@@ -3,6 +3,15 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
+
+from django.contrib.auth import authenticate
+from rest_framework.permissions import AllowAny
+
 # Serializers imports
 from apps.users.api.serializers import (
     UserSerializer,
@@ -33,11 +42,11 @@ class UserApiView(APIView):
         )
 
 class CreateUserApiView(APIView): 
-
+    permission_classes = (AllowAny,)
     def post(self, request):
         """Crea un nuevo registro/user """
 
-        user_serializer = UserSerializer(data=request.data, many=True)
+        user_serializer = UserSerializer(data=request.data)
 
         if user_serializer.is_valid():
             user_serializer.save()
@@ -53,6 +62,30 @@ class CreateUserApiView(APIView):
             data=user_serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+
+class AuthLoginAPIView(TokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        response = {"detail": "Invalid credentials"}
+
+        try:
+            # data['username'] = data['user']
+            data['email'] = data['email']
+            data['password'] = data['password']
+        except Exception:
+            return Response(response, status=status.HTTP_401_UNAUTHORIZED)
+
+        user = authenticate(email=data['email'],
+                            password=data['password'])
+
+        if (user is not None):
+            serializer = self.get_serializer(data=request.data)
+            response = serializer.validate(request.data)
+        else:
+            return Response(response, status=status.HTTP_401_UNAUTHORIZED)
+
+        return Response(response, status=status.HTTP_201_CREATED)
+
 
 class UserDetailApiView(APIView):
 
