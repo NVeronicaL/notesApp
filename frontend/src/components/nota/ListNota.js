@@ -34,18 +34,20 @@ const ListNota = () => {
 
 
     return(
-        <div className='NotesList'>
+        <>
+        <div className="col-md-8 mx-auto" style={{background:"#dee2e6",padding: "10px", marginTop: "50px"}}>
+        <h2 className="mb-3 text-center">Todas las Notas</h2>
             {notas.length ? (
             <>
-                <h5>Todas las notas</h5>
                 {notas.map((nota) => (
                     <ListGroup key={nota.id}>
-                        <ListGroup.Item >N°{nota.id} - {nota.title} <Link to={'#'}>Ver</Link></ListGroup.Item>
+                        <ListGroup.Item >N°{nota.id} - {nota.title} <Link to={'/nota'}>Ver</Link></ListGroup.Item>
                     </ListGroup>
                 ))}
             </>
             ) : null}
         </div>
+        </>
     )
 }
 
