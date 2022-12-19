@@ -1,10 +1,14 @@
 // import { render } from "@testing-library/react";
 import React, {useState, useEffect} from "react";
-// import {useParams, useNavigate} from "reac-router-dom";
+import { useNavigate } from 'react-router-dom' ;
 
-import * as Server from './UserServer';
+import axios from "axios";
+
+// import * as Server from './UserServer';
 
 const FormRegister = () => {
+    const navigate = useNavigate();
+
     // HOOK useState
     const [user, setUser] = useState({
         username: '',
@@ -18,32 +22,33 @@ const FormRegister = () => {
         setUser({ ...user, [e.target.name]: e.target.value});
     }
 
-    async function handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         // let formData = new FormData();  
         // formData.append('username', user.username);
         // formData.append('email', user.email);
         // formData.append('password', user.password);
-        
-        try {
-            // console.log('formData:', formData);
-            console.log('user:', user);
-            const response = await Server.createUser(user);
-            const data = response.json();
-            console.log('DATA: ', data);
-        } catch (error) {
-            console.log(error);
-        }
+
+        axios
+        .post('http://127.0.0.1:8000/user/create-user/', user, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => {
+            setUser(response.data);
+            navigate('/login');
+        });
     }
     // Efecto
     useEffect(() => {
-    }, [])
+    }, [user])
 
     return(
         <>
         <div>
-            <div className="col-md-3 mx-auto">
+            <div className="col-md-3 mx-auto" style={{background:"#dee2e6",padding: "10px", marginTop: "50px"}}>
             <h2 className="mb-3 text-center">Formulario de Registro</h2>
             <hr style={{color: 'pink'}}></hr>
             <form className="form-register" onSubmit={handleSubmit}>
