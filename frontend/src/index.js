@@ -9,6 +9,7 @@ import FormNota from './components/nota/FormNota';
 import ListNota from './components/nota/ListNota';
 import Nota from './components/nota/Nota';
 import Menu from './components/navbar/Navbar';
+import Home from './components/home/Home';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -21,6 +22,7 @@ root.render(
       <Menu></Menu>
       <Routes>
         <Route exact path='/' element={<App></App>}></Route>
+        <Route exact path='/home' element={<Home></Home>}></Route>
         <Route path='/register' element={<FormRegister></FormRegister>}></Route>
         <Route path='/login' element={<FormLogin></FormLogin>}></Route>
         <Route path='/notas' element={<ListNota></ListNota>}></Route>
