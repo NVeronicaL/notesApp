@@ -26,3 +26,6 @@ instalción de depencias o librerias por terminal : npm install
 ej:  npm install react-bootstrap bootstrap
 ~~~
 
+
+Exportación de DB como práctica : 
+[enlace DB](https://drive.google.com/file/d/1RSs6qg-x2phksv-nlQvrs2cSZt3uHezQ/view?usp=share_link)
