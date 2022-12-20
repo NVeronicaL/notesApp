@@ -10,7 +10,7 @@ const Menu = () => {
      <div>
         <Navbar bg="light" expand="lg">
             <Container>
-            <Navbar.Brand href="#home">App of Notes</Navbar.Brand>
+            <Navbar.Brand href="/">AppOfNotes</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
